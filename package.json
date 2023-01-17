@@ -1,0 +1,35 @@
+{
+  "name": "cse341-apicourse-code",
+  "version": "1.0.0",
+  "description": "code to give to students for the cse341 course",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "devStart": "nodemon server.js",
+    "start": "node server.js",
+    "swagger": "node ./swagger.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathanbirch/cse341-apiCourse-code.git"
+  },
+  "author": "Nathan Birch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nathanbirch/cse341-apiCourse-code/issues"
+  },
+  "homepage": "https://github.com/nathanbirch/cse341-apiCourse-code#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.17.3",
+    "mongodb": "^4.13.0"
+  },
+  "devDependencies": {
+    "@types/faker": "^6.6.9",
+    "eslint": "^8.31.0",
+    "faker": "^5.5.3",
+    "nodemon": "^2.0.15",
+    "swagger-autogen": "^2.22.0",
+    "swagger-ui-express": "^4.6.0"
+  }
+}

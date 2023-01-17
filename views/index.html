@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyle's Test Site</title>
+    <style>
+        body {
+            background-color: lavender;
+        }
+
+        .page-container {
+            background-color: rgb(185, 215, 241);
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 3em;
+        }
+
+        form {
+            background-color: silver;
+            width: 500px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 2em;
+        }
+
+        input {
+            padding: 0.5em;
+            margin: 0.5em;
+        }
+
+        button {
+            margin: 1em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-container">
+        <h1>
+            Hello, World.
+        </h1>
+        <p>
+            Welcome to Kyle Coulon's landing page.
+        </p>
+
+        <a href="/contacts">Contacts Link</a>
+
+
+        <form action="/contacts" method="post">
+
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName">
+
+            <label for="lastName">Lastsification Name</label>
+            <input type="text" id="lastName" name="lastName">
+
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email">
+
+            <label for="favoriteColor">Favorite Color</label>
+            <input type="text" id="favoriteColor" name="favoriteColor">
+
+            <label for="birthday">Birthday</label>
+            <input type="text" id="birthday" name="birthday">
+
+            <!-- submit -->
+            <input type="submit" value="Create Contact">
+        </form>
+    </div>
+
+</body>
+
+</html>

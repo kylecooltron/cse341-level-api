@@ -1,0 +1,41 @@
+{
+   $jsonSchema: {
+      bsonType: "object",
+      required: [ "firstName", "lastName", "email", "favoriteColor", "birthday" ],
+      properties: {
+         firstName: {
+            bsonType: "string",
+            description: "must be a string"
+         },
+         lastName: {
+            bsonType: "string",
+            description: "must be a string"
+         },
+         email: {
+            bsonType: "string",
+            description: "must be a string"
+         },
+         favoriteColor: {
+            bsonType: "string",
+            description: "must be a string"
+         },
+         birthday: {
+            bsonType: "date",
+            description: "must be a date"
+         },
+         age: {
+            bsonType: "int",
+            description: "must be an integer"
+         },
+         hobbies: {
+            bsonType: "array",
+            description: "must be an array"
+         },
+         friends_list: {
+            bsonType: "array",
+            description: "must be an array"
+         },
+         
+      }
+   }
+}
