@@ -8,65 +8,55 @@
 // - - - - - - - - - - - - - - - - - - - - - LOCAL HOST
 
 ### list all contacts
-{{local}}/contacts
+{{local}}/blocks
 
 
 ### list contact by id
-{{local}}/contacts/63be53b5f0a60a8ef3aabfb2
+{{local}}/blocks/63be53b5f0a60a8ef3aabfb2
 
 
 ### Create contact
-POST {{local}}/contacts HTTP/1.1
+POST {{local}}/blocks HTTP/1.1
 content-type: application/json
 
-{"firstName":"Rick","lastName":"Jones","email":"gamer5013@gmail.com","favoriteColor":"Rainbow","birthday":"2014-1-22"}
+{}
 
 
 ### Update contact
-PUT {{local}}/contacts/63be51dc2bfc475c309c9970 HTTP/1.1 
+PUT {{local}}/blocks/63be51dc2bfc475c309c9970 HTTP/1.1 
 content-type: application/json
 
-{"firstName":"Joseph", "lastName":"Smith", "email":"jsmith@test.com", "favoriteColor":"Gold", "birthday":"01/11/1820"}
+{}
 
 
 ### Delete Contact by Id
-DELETE {{local}}/contacts/63be51dc2bfc475c309c9970 HTTP/1.1
-
-
-### Create random contact with fake data
-POST {{local}}/contacts-generate HTTP/1.1
-content-type: application/json
+DELETE {{local}}/blocks/63be51dc2bfc475c309c9970 HTTP/1.1
 
 
 
 // - - - - - - - - - - - - - - - - - - - - - RENDER
 
 ### list all contacts
-{{render}}/contacts
+{{render}}/blocks
 
 
 ### list contact by id
-{{render}}/contacts/63be5949e919669ee83e5d67
+{{render}}/blocks/63be5949e919669ee83e5d67
 
 
 ### Create contact
-POST {{render}}/contacts HTTP/1.1
+POST {{render}}/blocks HTTP/1.1
 content-type: application/json
 
-{"firstName":"Rick","lastName":"Jones","email":"gamer5013@gmail.com","favoriteColor":"Rainbow","birthday":"2014-1-22"}
+{}
 
 
 ### Update contact
-PUT {{render}}/contacts/63be5924e919669ee83e5d66 HTTP/1.1 
+PUT {{render}}/blocks/63be5924e919669ee83e5d66 HTTP/1.1 
 content-type: application/json
 
-{"firstName":"Joseph", "lastName":"Smith", "email":"jsmith@test.com", "favoriteColor":"Gold", "birthday":"01/11/1820"}
+{}
 
 
 ### Delete Contact by Id
-DELETE {{render}}/contacts/63be5924e919669ee83e5d66 HTTP/1.1
-
-
-### Create random contact with fake data
-POST {{render}}/contacts-generate HTTP/1.1
-content-type: application/json
+DELETE {{render}}/blocks/63be5924e919669ee83e5d66 HTTP/1.1
