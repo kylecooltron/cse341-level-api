@@ -1,7 +1,7 @@
 {
-  "name": "cse341-apicourse-code",
+  "name": "game-level-api",
   "version": "1.0.0",
-  "description": "code to give to students for the cse341 course",
+  "description": "Kyle's api project for CSE341 for building levels",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,16 +9,8 @@
     "start": "node server.js",
     "swagger": "node ./swagger.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nathanbirch/cse341-apiCourse-code.git"
-  },
-  "author": "Nathan Birch",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nathanbirch/cse341-apiCourse-code/issues"
-  },
-  "homepage": "https://github.com/nathanbirch/cse341-apiCourse-code#readme",
+  "author": "Kyle Coulon",
+  "homepage": "https://github.com/kylecooltron/cse341-level-api#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.17.3",
