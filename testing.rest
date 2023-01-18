@@ -1,7 +1,7 @@
 
 // Variables
 @local = http://localhost:3000
-@render = https://cse341-lesson2-119m.onrender.com
+@render = https://cse341-level-api.onrender.com
 
 
 
@@ -23,7 +23,7 @@ content-type: application/json
 
 
 ### Update Level
-PUT {{local}}/levels/63c76a5e287964cb34f7c9c5 HTTP/1.1 
+PUT {{local}}/levels/63c7979f2dfc9f2af1d4c3df HTTP/1.1 
 content-type: application/json
 
 {"level_name":"test level","level_author":"lyle","level_block_data":[{"grid_x": "11","grid_y": "6","width": "1","height": "1","color": "blue","bouncy": "on","causes_damage": "on"}]}
@@ -52,10 +52,10 @@ content-type: application/json
 
 
 ### Update level
-PUT {{render}}/levels/63be5924e919669ee83e5d66 HTTP/1.1 
+PUT {{render}}/levels/63c7a0cbdf0072231995e958 HTTP/1.1 
 content-type: application/json
 
-{"level_name":"render test level","level_author":"lyle","level_block_data":[{"grid_x": "10","grid_y": "6","width": "1","height": "1","color": "red","bouncy": "on","causes_damage": "on"}]}
+{"level_name":"render test level 1.0","level_author":"lyle","level_block_data":[{"grid_x": "10","grid_y": "6","width": "1","height": "1","color": "red","bouncy": "on","causes_damage": "on"}]}
 
 
 ### Delete level by Id
