@@ -1,26 +1,19 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "My API",
-    "description": "Contacts API",
+    "title": "Level API",
+    "description": "Kyle level saving API",
     "version": "1.0.0"
   },
-  "host": "cse341-lesson2-119m.onrender.com",
+  "host": "cse341-level-api.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
   ],
   "paths": {
-    "/api-docs": {
+    "/levels/": {
       "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/contacts/": {
-      "get": {
-        "description": "",
+        "description": "Return a list of all levels from DB",
         "produces": [
           "application/json"
         ],
@@ -28,11 +21,14 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "post": {
-        "description": "",
+        "description": "Create a new level",
         "parameters": [
           {
             "name": "body",
@@ -40,20 +36,33 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "any"
+                "level_name": {
+                  "example": "Level 1"
                 },
-                "lastName": {
-                  "example": "any"
+                "level_author": {
+                  "example": "Kyle Cool"
                 },
-                "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
-                  "example": "any"
+                "level_block_data": {
+                  "example": [
+                    {
+                      "grid_x": "10",
+                      "grid_y": "12",
+                      "width": "1",
+                      "height": "1",
+                      "color": "green",
+                      "bouncy": "false",
+                      "causes_damage": "false"
+                    },
+                    {
+                      "grid_x": "11",
+                      "grid_y": "13",
+                      "width": "1",
+                      "height": "1",
+                      "color": "green",
+                      "bouncy": "false",
+                      "causes_damage": "false"
+                    }
+                  ]
                 }
               }
             }
@@ -69,9 +78,9 @@
         }
       }
     },
-    "/contacts/{id}": {
+    "/levels/{id}": {
       "get": {
-        "description": "",
+        "description": "Get level by ID",
         "produces": [
           "application/json"
         ],
@@ -93,7 +102,7 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Update an existing level by ID",
         "parameters": [
           {
             "name": "id",
@@ -107,20 +116,24 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "any"
+                "level_name": {
+                  "example": "Level 1.1"
                 },
-                "lastName": {
-                  "example": "any"
+                "level_author": {
+                  "example": "Kyle Coolon"
                 },
-                "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
-                  "example": "any"
+                "level_block_data": {
+                  "example": [
+                    {
+                      "grid_x": "9",
+                      "grid_y": "8",
+                      "width": "1",
+                      "height": "1",
+                      "color": "red",
+                      "bouncy": "false",
+                      "causes_damage": "false"
+                    }
+                  ]
                 }
               }
             }
@@ -136,7 +149,7 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete an existing level by ID",
         "parameters": [
           {
             "name": "id",
@@ -145,20 +158,6 @@
             "type": "string"
           }
         ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/contacts-generate/": {
-      "post": {
-        "description": "Create a random contact with generated data using faker.js",
-        "parameters": [],
         "responses": {
           "204": {
             "description": "No Content"

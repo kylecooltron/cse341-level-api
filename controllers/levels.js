@@ -5,8 +5,6 @@ const collection = "level_data";
 const { validate_request, ArrayOfTemplate } = require('../model/data');
 
 const block_template = {
-  level_id: String,
-  name: String,
   grid_x: Number,
   grid_y: Number,
   width: Number,

@@ -2,10 +2,10 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
     info: {
-        title: 'My API',
-        description: 'Contacts API'
+        title: 'Level API',
+        description: 'Kyle level saving API'
     },
-    host: 'cse341-lesson2-119m.onrender.com',
+    host: 'cse341-level-api.onrender.com',
     schemes: ['https']
 };
 
