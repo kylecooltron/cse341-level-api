@@ -2,8 +2,7 @@ const mongodb = require('../db/connect');
 const { ObjectId } = require('mongodb');
 const database = "cse341-database";
 const collection = "level_data";
-const { validate_request } = require('../model/data');
-
+const { validate_request, ArrayOfTemplate } = require('../model/data');
 
 const block_template = {
   level_id: String,
@@ -17,11 +16,17 @@ const block_template = {
   causes_damage: Boolean,
 }
 
+const level_template = {
+  level_name: String,
+  level_author: String,
+  level_block_data: new ArrayOfTemplate(block_template),
+}
+
 const id_template = {
   id: String,
 }
 
-const getAllBlocks = async (req, res) => {
+const getAllLevels = async (req, res) => {
   try {
     const response = await mongodb.getDb().db(database).collection(collection).find();
     response.toArray().then((list) => {
@@ -33,7 +38,7 @@ const getAllBlocks = async (req, res) => {
   }
 };
 
-const getBlockById = async (req, res) => {
+const getLevelById = async (req, res) => {
   try {
     const [valid, output] = validate_request(req.params, id_template);
 
@@ -55,7 +60,7 @@ const getBlockById = async (req, res) => {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(response[0]);
     } else {
-      res.status(500).json('Block not found.');
+      res.status(500).json('Level not found.');
     }
   } catch (err) {
     res.status(500).json(err);
@@ -63,9 +68,9 @@ const getBlockById = async (req, res) => {
 };
 
 
-const createBlock = async (req, res) => {
+const createLevel = async (req, res) => {
   try {
-    const [valid, output] = validate_request(req.body, block_template);
+    const [valid, output] = validate_request(req.body, level_template);
 
     if (!valid) {
       res.status(500).json(`Invalid request body: ${output}`);
@@ -79,7 +84,7 @@ const createBlock = async (req, res) => {
     if (response.acknowledged) {
       res.status(201).json(response);
     } else {
-      res.status(500).json(response.error || 'Some error occurred while creating the contact.');
+      res.status(500).json(response.error || 'Some error occurred while creating the level.');
     }
 
   } catch (err) {
@@ -88,7 +93,7 @@ const createBlock = async (req, res) => {
 };
 
 
-const deleteBlock = async (req, res) => {
+const deleteLevel = async (req, res) => {
   try {
     const [valid, output] = validate_request(req.params, id_template);
 
@@ -100,20 +105,20 @@ const deleteBlock = async (req, res) => {
       return
     }
 
-    const contactId = new ObjectId(output.id);
-    const response = await mongodb.getDb().db(database).collection(collection).deleteOne({ _id: contactId }, true);
+    const levelId = new ObjectId(output.id);
+    const response = await mongodb.getDb().db(database).collection(collection).deleteOne({ _id: levelId }, true);
 
     if (response.deletedCount > 0) {
       res.status(204).send();
     } else {
-      res.status(500).json(response.error || 'Some error occurred while deleting the contact.');
+      res.status(500).json(response.error || 'Some error occurred while deleting the level.');
     }
   } catch (err) {
     res.status(500).json(err);
   }
 };
 
-const updateBlock = async (req, res) => {
+const updateLevel = async (req, res) => {
   try {
     const [params_valid, params_output] = validate_request(req.params, id_template);
 
@@ -125,7 +130,7 @@ const updateBlock = async (req, res) => {
       return
     }
 
-    const [body_valid, body_output] = validate_request(req.body, block_template);
+    const [body_valid, body_output] = validate_request(req.body, level_template);
 
     if (!body_valid) {
       res.status(500).json(`Invalid request body: ${body_output}`);
@@ -135,13 +140,13 @@ const updateBlock = async (req, res) => {
       return
     }
 
-    const contactId = new ObjectId(params_output.id);
-    const response = await mongodb.getDb().db(database).collection(collection).replaceOne({ _id: contactId }, body_output);
+    const levelId = new ObjectId(params_output.id);
+    const response = await mongodb.getDb().db(database).collection(collection).replaceOne({ _id: levelId }, body_output);
 
     if (response.modifiedCount > 0) {
       res.status(204).send();
     } else {
-      res.status(500).json(response.error || 'Some error occurred while updating the contact.');
+      res.status(500).json(response.error || 'Some error occurred while updating the level.');
     }
   } catch (err) {
     res.status(500).json(err);
@@ -149,4 +154,4 @@ const updateBlock = async (req, res) => {
 };
 
 
-module.exports = { getAllBlocks, getBlockById, createBlock, deleteBlock, updateBlock };
+module.exports = { getAllLevels, getLevelById, createLevel, deleteLevel, updateLevel };

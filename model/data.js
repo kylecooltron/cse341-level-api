@@ -17,8 +17,30 @@ const validate_request = (body, doc_template) => {
                     } else {
                         body[key] = new Date(body[key]);
                     }
-                    // try cast for other types
+
+                } else if (doc_template[key] instanceof ArrayOfTemplate) {
+                    // ensure that the body contains an array
+                    if (!Array.isArray(body[key])) {
+                        throw new Error(`${body[key]} is not an Array as expected`);
+                    }
+                    // ensure that the elements in the array match the type
+                    const array_template = doc_template[key].template;
+                    body[key].forEach((item, item_index) => {
+                        // recursively call this function on each item in the array
+                        const item_result = validate_request(item, array_template);
+                        if (!item_result[0]) {
+                            return [
+                                false,
+                                `Failed when validating element in array: ${item}
+                                Details: ${item_result[1]}`
+                            ]
+                        } else {
+                            // array item validated - set to result to leave out any extra properties
+                            body[key][item_index] = item_result[1];
+                        }
+                    })
                 } else {
+                    // try cast for other types
                     doc_template[key](body[key]);
                 }
             } catch (e) {
@@ -37,4 +59,15 @@ const validate_request = (body, doc_template) => {
     return [true, result];
 }
 
-module.exports = { validate_request };
+
+class ArrayOfTemplate {
+    /**
+     * type should be a template object
+     */
+    constructor(template) {
+        this.template = template;
+    }
+}
+
+
+module.exports = { validate_request, ArrayOfTemplate };
