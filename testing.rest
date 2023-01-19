@@ -11,21 +11,21 @@
 {{local}}/levels
 
 ### list Level by id
-{{local}}/levels/63c89e0abcb8928b4d3569cf
+{{local}}/levels/63c7a54289285a3f4521e2a8
 
 
 ### Create Level
 POST {{local}}/levels HTTP/1.1
 content-type: application/json
 
-{"level_name":"test level","level_author":"kyle","level_block_data":[{"grid_x": "10","grid_y": "6","width": "1","height": "1","color": "green","bouncy": "on","causes_damage": "on"}]}
+{"level_name":"Test namedsdgf","level_author":"kyle","level_block_data":[{"grid_x": "10","grid_y": "6","width": "1","height": "1","color": "green","bouncy": "true","causes_damage": "true"}]}
 
 
 ### Update Level
-PUT {{local}}/levels/63c89e0abcb8928b4d3569cf HTTP/1.1 
+PUT {{local}}/levels/63c8edb0a3dec2188e7917bb HTTP/1.1 
 content-type: application/json
 
-{"level_name":"test level","level_author":"lyle","level_block_data":[{"grid_x": "11","grid_y": "6","width": "1","height": "1","color": "blue","bouncy": "on","causes_damage": "on"}]}
+{"level_name":"test level","level_author":"lyle","level_block_data":[{"grid_x": "11","grid_y": "6","width": "1","height": "1","color": "blue","bouncy": "true","causes_damage": "true"}]}
 
 
 ### Delete Level by Id
@@ -40,22 +40,22 @@ DELETE {{local}}/levels/63c89e0abcb8928b4d3569cf HTTP/1.1
 
 
 ### list level by id
-{{render}}/levels/63c7aaff89285a3f4521e2ab
+{{render}}/levels/63c8ede7136edea12ff5a9f8
 
 
 ### Create level
 POST {{render}}/levels HTTP/1.1
 content-type: application/json
 
-{"level_name":"render test level","level_author":"kyle","level_block_data":[{"grid_x": "10","grid_y": "6","width": "1","height": "1","color": "blue","bouncy": "on","causes_damage": "on"}]}
+{"level_name":"render test level","level_author":"kyle","level_block_data":[{"grid_x": "10","grid_y": "6","width": "1","height": "1","color": "blue","bouncy": "true","causes_damage": "true"}]}
 
 
 ### Update level
-PUT {{render}}/levels/63c7aaff89285a3f4521e2ab HTTP/1.1 
+PUT {{render}}/levels/63c8ede7136edea12ff5a9f8 HTTP/1.1 
 content-type: application/json
 
-{"level_name":"render test level 1.0","level_author":"lyle","level_block_data":[{"grid_x": "10","grid_y": "6","width": "1","height": "1","color": "red","bouncy": "on","causes_damage": "on"}]}
+{"level_name":"render test level 1.0","level_author":"lyle","level_block_data":[{"grid_x": "10","grid_y": "6","width": "1","height": "1","color": "red","bouncy": "true","causes_damage": "true"}]}
 
 
 ### Delete level by Id
-DELETE {{render}}/levels/63c7aaff89285a3f4521e2ab HTTP/1.1
+DELETE {{render}}/levels/63c8ede7136edea12ff5a9f8 HTTP/1.1

@@ -24,6 +24,13 @@ app
   })
   .use('/', require('./routes'));
 
+// this seems to catch error messages I created myself before they are sent in response
+// // eslint-disable-next-line no-undef
+// process.on('uncaughtException', (err, origin) => {
+//   // eslint-disable-next-line no-undef
+//   console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
+// });
+
 // eslint-disable-next-line no-unused-vars
 mongodb.initDb((err, mongodb) => {
   if (err) {

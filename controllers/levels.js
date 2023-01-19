@@ -3,6 +3,7 @@ const { ObjectId } = require('mongodb');
 const database = "cse341-database";
 const collection = "level_data";
 const { validate_request, ArrayOfTemplate } = require('../model/data');
+const { validationResult } = require('express-validator');
 
 const block_template = {
   grid_x: Number,
@@ -21,16 +22,21 @@ const level_template = {
 }
 
 const id_template = {
-  id: String,
+  id: ObjectId,
 }
 
 const getAllLevels = async (req, res) => {
   try {
-    const response = await mongodb.getDb().db(database).collection(collection).find();
-    response.toArray().then((list) => {
+    await mongodb.getDb().db(database).collection(collection).find().toArray((err, list) => {
+      if (err) {
+        res.status(500).send({
+          error: `Cannot convert to array: ${err}`,
+        });
+      }
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(list);
     });
+
   } catch (err) {
     res.status(500).json(err);
   }
@@ -44,18 +50,28 @@ const getLevelById = async (req, res) => {
       throw new Error(`Invalid request params: ${output}`);
     }
 
-    const response = await mongodb.getDb().db(database).collection(collection).find(
+    await mongodb.getDb().db(database).collection(collection).find(
       {
         "_id": ObjectId(output.id)
       }
-    ).toArray()
+    ).toArray((err, list) => {
 
-    if (response.length > 0) {
-      res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(response[0]);
-    } else {
-      throw new Error(`Level not found with id ${output.id}`);
-    }
+      if (err) {
+        res.status(500).send({
+          error: `Cannot convert to array: ${err}`,
+        });
+      }
+
+      if (list.length > 0) {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(list[0]);
+      } else {
+        res.status(500).send({
+          error: `Level not found with id ${output.id}`,
+        });
+      }
+
+    })
 
   } catch (err) {
     res.status(500).send({
@@ -68,10 +84,19 @@ const getLevelById = async (req, res) => {
 
 const createLevel = async (req, res) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
 
     const [valid, output] = validate_request(req.body, level_template);
     if (!valid) {
       throw new Error(`Invalid request body: ${output}`);
+    }
+
+    const alreadyExists = await mongodb.getDb().db(database).collection(collection).findOne({ level_name: output.level_name });
+    if (alreadyExists) {
+      throw new Error(`Level with name already exists: ${output.level_name}`);
     }
 
     const response = await mongodb.getDb().db(database).collection(collection).insertOne(output);
@@ -120,6 +145,11 @@ const deleteLevel = async (req, res) => {
 
 const updateLevel = async (req, res) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
     const [params_valid, params_output] = validate_request(req.params, id_template);
     if (!params_valid) {
       throw new Error(`Invalid request params: ${params_output}`);

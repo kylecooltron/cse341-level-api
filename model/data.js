@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 
 
 const validate_request = (body, doc_template) => {
@@ -39,9 +40,14 @@ const validate_request = (body, doc_template) => {
                             body[key][item_index] = item_result[1];
                         }
                     })
+                } else if (doc_template[key] instanceof ObjectId) {
+                    ObjectId(body[key]);
                 } else {
                     // try cast for other types
                     doc_template[key](body[key]);
+                    if (String(body[key]).trim() == "") {
+                        throw new Error(`${body[key]} is empty`);
+                    }
                 }
             } catch (e) {
                 return [
