@@ -38,69 +38,66 @@ const getAllLevels = async (req, res) => {
 
 const getLevelById = async (req, res) => {
   try {
-    const [valid, output] = validate_request(req.params, id_template);
 
+    const [valid, output] = validate_request(req.params, id_template);
     if (!valid) {
-      res.status(500).json(`Invalid request params: ${output}`);
-      // for debugging
-      console.log("Request Params were:");
-      console.log(req.params);
-      return
+      throw new Error(`Invalid request params: ${output}`);
     }
 
     const response = await mongodb.getDb().db(database).collection(collection).find(
       {
         "_id": ObjectId(output.id)
       }
-    ).toArray();
+    ).toArray()
 
     if (response.length > 0) {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(response[0]);
     } else {
-      res.status(500).json('Level not found.');
+      throw new Error(`Level not found with id ${output.id}`);
     }
+
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).send({
+      error: String(err),
+      params: req.params
+    });
   }
 };
 
 
 const createLevel = async (req, res) => {
   try {
-    const [valid, output] = validate_request(req.body, level_template);
 
+    const [valid, output] = validate_request(req.body, level_template);
     if (!valid) {
-      res.status(500).json(`Invalid request body: ${output}`);
-      // for debugging
-      console.log("Request Body was:");
-      console.log(req.body);
-      return
+      throw new Error(`Invalid request body: ${output}`);
     }
 
     const response = await mongodb.getDb().db(database).collection(collection).insertOne(output);
+
     if (response.acknowledged) {
       res.status(201).json(response);
     } else {
-      res.status(500).json(response.error || 'Some error occurred while creating the level.');
+      throw new Error(response.error || 'Some error occurred while creating the level.');
     }
 
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).send({
+      error: String(err),
+      body: req.body
+    });
   }
+
 };
 
 
 const deleteLevel = async (req, res) => {
   try {
-    const [valid, output] = validate_request(req.params, id_template);
 
+    const [valid, output] = validate_request(req.params, id_template);
     if (!valid) {
-      res.status(500).json(`Invalid request params: ${output}`);
-      // for debugging
-      console.log("Request Params were:");
-      console.log(req.params);
-      return
+      throw new Error(`Invalid request params: ${output}`);
     }
 
     const levelId = new ObjectId(output.id);
@@ -109,33 +106,28 @@ const deleteLevel = async (req, res) => {
     if (response.deletedCount > 0) {
       res.status(204).send();
     } else {
-      res.status(500).json(response.error || 'Some error occurred while deleting the level.');
+      const err_string = `ID: ${output.id} may not exist in the DB`;
+      throw new Error(response.error || err_string);
     }
+
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).send({
+      error: String(err),
+      params: req.params
+    });
   }
 };
 
 const updateLevel = async (req, res) => {
   try {
     const [params_valid, params_output] = validate_request(req.params, id_template);
-
     if (!params_valid) {
-      res.status(500).json(`Invalid request params: ${params_output}`);
-      // for debugging
-      console.log("Request Params were:");
-      console.log(req.params);
-      return
+      throw new Error(`Invalid request params: ${params_output}`);
     }
 
     const [body_valid, body_output] = validate_request(req.body, level_template);
-
     if (!body_valid) {
-      res.status(500).json(`Invalid request body: ${body_output}`);
-      // for debugging
-      console.log("Request Body was:");
-      console.log(req.body);
-      return
+      throw new Error(`Invalid request body: ${body_output}`);
     }
 
     const levelId = new ObjectId(params_output.id);
@@ -144,10 +136,16 @@ const updateLevel = async (req, res) => {
     if (response.modifiedCount > 0) {
       res.status(204).send();
     } else {
-      res.status(500).json(response.error || 'Some error occurred while updating the level.');
+      const err_string = `ID: ${params_output.id} may not exist in the DB`;
+      throw new Error(response.error || err_string);
     }
+
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).send({
+      error: String(err),
+      params: req.params,
+      body: req.body
+    });
   }
 };
 
