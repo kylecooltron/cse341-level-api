@@ -1,0 +1,31 @@
+npm i express-openid-connect
+dotenv
+
+app.use middle ware endpoints login logout urls
+
+auth zero tennant applications create new regular web app node js express, integrate existing
+
+
+import open id top of server js
+
+config above app.use
+
+middle ware apply above router
+
+.env put 
+
+copy secret baseurl clientid baseurl issuer all capitals into dotenv.. 
+
+replace with process.env.SECRET in the server.js
+
+req.oidc.isAuthenticated()
+req.oidc.user
+
+res.render("index", {
+title: "Express Demo"
+}
+
+.ejs
+
+
+
