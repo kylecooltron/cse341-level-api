@@ -9,10 +9,11 @@ const levelValidate = [
     check('level_block_data.*.width').trim().isNumeric(),
     check('level_block_data.*.height').trim().isNumeric(),
     check('level_block_data.*.color').isLength({ min: 3 }).trim().escape().isIn([
-        'blue', 'red', 'purple', 'gray', 'black', 'lime', 'green', 'red'
+        'blue', 'red', 'purple', 'gray', 'black', 'lime', 'green', 'red', 'yellow'
     ]),
     check('level_block_data.*.bouncy').isBoolean(),
     check('level_block_data.*.causes_damage').isBoolean(),
 ]
+
 
 module.exports = { levelValidate };
