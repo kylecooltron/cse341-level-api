@@ -7,18 +7,12 @@ const swaggerDocument = require('./swagger.json');
 
 const { auth } = require('express-openid-connect');
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 // const jwt = require('express-jwt');
 // const jwks = require('jwks-rsa');
 
-
-const config = {
-  authRequired: false,
-  auth0Logout: true,
-  secret: process.env.SECRET,
-  baseURL: process.env.BASEURL,
-  clientID: process.env.CLIENTID,
-  issuerBaseURL: process.env.ISSUER
-};
 
 // const jwtCheck = jwt({
 //   secret: jwks.expressJwtSecret({
@@ -34,6 +28,15 @@ const config = {
 
 // eslint-disable-next-line no-undef
 const port = process.env.PORT || 3000;
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.SECRET,
+  baseURL: process.env.BASEURL,
+  clientID: process.env.CLIENTID,
+  issuerBaseURL: process.env.ISSUER
+};
 
 app
   .use(express.json())
