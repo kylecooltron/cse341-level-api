@@ -1,4 +1,8 @@
 const express = require('express');
+
+const dotenv = require('dotenv');
+dotenv.config();
+
 const app = express();
 const mongodb = require('./db/connect');
 
@@ -6,9 +10,6 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
 const { auth } = require('express-openid-connect');
-
-const dotenv = require('dotenv');
-dotenv.config();
 
 // const jwt = require('express-jwt');
 // const jwks = require('jwks-rsa');
@@ -39,6 +40,7 @@ const config = {
 };
 
 app
+  .use(auth(config))
   .use(express.json())
   .use(express.urlencoded({ extended: true }))
   .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
@@ -52,7 +54,6 @@ app
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONs');
     next();
   })
-  .use(auth(config))
   // .use(jwtCheck)
   .use('/', require('./routes'));
 
