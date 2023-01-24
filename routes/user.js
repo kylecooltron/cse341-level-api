@@ -6,7 +6,7 @@ const routes = require('express').Router();
 
 const isAuthorized = async (req, res) => {
     try {
-        if (!req.oidc.isAuthenticated()) {
+        if (req.oidc.isAuthenticated()) {
             res.status(200).json({
                 "authorized": true,
             });

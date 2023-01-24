@@ -105,3 +105,36 @@
    #levels-list li:hover {
        background-color: rgb(175, 250, 255);
    }
+
+   #sign-in-container {
+       margin: 0.5em;
+       padding: 0.5em;
+   }
+
+   #sign-in-container button {
+       margin: 0.5em;
+       padding: 0.5em;
+       width: 150px;
+   }
+
+   .signed-in {
+       border: 2px solid greenyellow;
+       border-radius: 0.5em;
+       background-color: rgb(205, 235, 205);
+   }
+
+
+   .signed-out {
+       border: 2px solid rgb(255, 78, 47);
+       background-color: rgb(238, 198, 198);
+       border-radius: 0.5em;
+   }
+
+   .signed-in {
+       width: 200px;
+   }
+
+   #level-list-container {
+       max-height: 250px;
+       overflow: scroll;
+   }

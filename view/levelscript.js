@@ -82,7 +82,9 @@ function get_player_block() {
 function sign_in_button_pressed() {
     window.location.replace("https://cse341-level-api.onrender.com/login");
 }
-
+function sign_out_button_pressed() {
+    window.location.replace("https://cse341-level-api.onrender.com/logout");
+}
 
 function check_user_signedin() {
     fetch(`https://cse341-level-api.onrender.com/authorized`)
@@ -92,11 +94,14 @@ function check_user_signedin() {
 
                 if (response.authorized) {
                     document.querySelector("#signed-in-status").innerHTML = "SIGNED IN";
-                    document.querySelector("#sign-in-button").style.visibility = "hidden";
+                    document.querySelector("#sign-in-button").innerHTML = "Sign Out"
+                    document.querySelector("#sign-in-container").classList.add("signed-in");
+                    document.querySelector("#sign-in-button").addEventListener("click", sign_out_button_pressed);
                 } else {
                     document.querySelector("#signed-in-status").innerHTML = "NOT SIGNED IN";
-                    document.querySelector("#sign-in-button").style.visibility = "visible";
+                    document.querySelector("#sign-in-container").classList.add("signed-out");
                     document.querySelector("#sign-in-button").addEventListener("click", sign_in_button_pressed);
+                    document.querySelector("#update-in-db").disabled = true;
                 }
 
             } catch {
