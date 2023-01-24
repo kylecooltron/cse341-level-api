@@ -1,12 +1,8 @@
+
 const routes = require('express').Router();
 
-
-
-routes.get('/', (req, res) => {
-    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-});
-
-
 routes.use('/levels', require('./levels'))
+
+routes.use('/authorized', require('./user'))
 
 module.exports = routes;
