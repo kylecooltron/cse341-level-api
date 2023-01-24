@@ -27,6 +27,11 @@ const id_template = {
 
 const getAllLevels = async (req, res) => {
   try {
+
+    // if (!req.oidc.isAuthenticated()) {
+    //   throw new Error(`Invalid request params: ${output}`);
+    // }
+
     await mongodb.getDb().db(database).collection(collection).find().toArray((err, list) => {
       if (err) {
         res.status(500).send({
@@ -119,6 +124,10 @@ const createLevel = async (req, res) => {
 
 const deleteLevel = async (req, res) => {
   try {
+
+    if (!req.oidc.isAuthenticated()) {
+      throw new Error(`Not authorized to delete, please log in at /login `);
+    }
 
     const [valid, output] = validate_request(req.params, id_template);
     if (!valid) {
