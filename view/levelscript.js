@@ -124,7 +124,8 @@ window.onload = () => {
     }
 
     game_container.addEventListener("click", (e) => {
-        document.querySelector("#output-json").style.backgroundColor = "pink";
+        document.querySelector("#output-json").style.backgroundColor = "#f03737";
+        document.querySelector("#right-controls").style.backgroundColor = "#ffd6dc";
 
         let rect = game_container.getBoundingClientRect();
         let mouse_x = e.clientX - rect.left;
@@ -162,6 +163,8 @@ window.onload = () => {
     document.querySelector("#output-json").addEventListener("click", () => {
         output_json();
         document.querySelector("#output-json").style.backgroundColor = "lime";
+        document.querySelector("#right-controls").style.backgroundColor = "#cffccf";
+
     })
     document.querySelector("#input-json").addEventListener("click", () => {
         input_json();

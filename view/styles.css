@@ -32,6 +32,7 @@
 
    .tool-option {
        margin: 1em 0;
+       display: inline;
    }
 
    h2 {
@@ -77,11 +78,11 @@
 
    #outmsg {
        width: 100%;
-       max-width: 170px;
+       width: 250px;
        overflow-wrap: break-word;
        background-color: rgb(164, 245, 218);
-       max-height: 300px;
-       overflow: hidden;
+       height: 150px;
+       overflow: scroll;
    }
 
    #levels-list {
@@ -130,11 +131,11 @@
        border-radius: 0.5em;
    }
 
-   .signed-in {
+   .sign-in {
        width: 200px;
    }
 
    #level-list-container {
-       max-height: 250px;
+       height: 150px;
        overflow: scroll;
    }
