@@ -38,20 +38,20 @@ const saveUserData = async (req, res) => {
 
         const user_data = {
             user_id: req.oidc.user_id,
-            user_name: req.oidc.user_name,
+            user_name: req.oidc.name
         }
 
         const alreadyExists = await mongodb.getDb().db(database).collection(collection).findOne(user_data);
         if (alreadyExists) {
             res.setHeader('Content-Type', 'application/json');
-            return res.status(200).json(alreadyExists);
+            return res.status(200).json(user_data);
         }
 
         // if user didn't already exists, add user info to database
         const response = await mongodb.getDb().db(database).collection(collection).insertOne(user_data);
 
         if (response.acknowledged) {
-            res.status(201).json(response);
+            res.status(201).json(user_data);
         } else {
             throw new Error(response.error || 'Some error occurred while adding new user to db.');
         }
