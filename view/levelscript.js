@@ -91,12 +91,9 @@ function save_user_data() {
         .then(response => response.json())
         .then(response => {
             try {
-
-                if (response.user_id) {
-                    document.querySelector("#user-name").innerHTML = response.user_name;
-                    document.querySelector("#user-id").innerHTML = response.user_id;
-                }
-
+                console.log(response);
+                document.querySelector("#user-name").innerHTML = response.user_name;
+                document.querySelector("#user-id").innerHTML = response.user_id;
             } catch (err) {
                 console.log(err);
             }
