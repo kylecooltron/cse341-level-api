@@ -47,6 +47,8 @@
         <p id="outmsg"></p>
         <hr>
         <button id="load-levels-list">Load levels List</button>
+        <label id="my-load-label" class="disabled-checkbox"><small>Only Load My Levels</small><input type="checkbox"
+                id="only-my-levels" name="only-my-levels" disabled></label>
         <div id="level-list-container">
             <ul id="levels-list"></ul>
         </div>
@@ -55,14 +57,19 @@
             <h2>Status: <span id="signed-in-status">Loading...</span></h2>
             <button id="sign-in-button">Sign in</button>
             <div class="sign-in">Updating/deleting levels not allowed unless you are signed in.</div>
-            <label>
-                User Name
-                <input id="user-name" type="text">
-            </label>
-            <label>
-                User ID
-                <input id="user-id" type="text">
-            </label>
+            <div>
+                <label>
+                    User Name
+                    <input id="user-name" type="text" disabled>
+                </label>
+            </div>
+            <div>
+                <label>
+                    User ID
+                    <input id="user-id" type="text" disabled>
+                </label>
+            </div>
+
         </div>
     </div>
 

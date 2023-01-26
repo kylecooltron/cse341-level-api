@@ -92,8 +92,10 @@ function save_user_data() {
         .then(response => {
             try {
                 console.log(response);
-                document.querySelector("#user-name").innerHTML = response.user_name;
-                document.querySelector("#user-id").innerHTML = response.user_id;
+                document.querySelector("#user-name").value = response.user_name;
+                document.querySelector("#user-id").value = response.user_id;
+                document.querySelector("#user-name").readOnly = true;
+                document.querySelector("#user-id").readOnly = true;
             } catch (err) {
                 console.log(err);
             }
@@ -113,6 +115,8 @@ function check_user_signedin() {
                     document.querySelector("#sign-in-button").addEventListener("click", sign_out_button_pressed);
                     // attempt to add user data to database
                     save_user_data();
+                    document.querySelector("#my-load-label").classList.remove("disabled-checkbox")
+                    document.querySelector("#only-my-levels").disabled = false;
                 } else {
                     document.querySelector("#signed-in-status").innerHTML = "NOT SIGNED IN";
                     document.querySelector("#sign-in-container").classList.add("signed-out");
@@ -129,7 +133,6 @@ function check_user_signedin() {
 
 
 window.onload = () => {
-
 
     // check if user is authenticated
     check_user_signedin();
@@ -215,12 +218,18 @@ function load_levels_list() {
             .then(response => {
 
                 response.forEach((level) => {
-                    const new_li = document.createElement("li");
-                    new_li.innerHTML = `<h2>${level.level_name}</h2> by ${level.level_author} ID: ${level._id}`;
-                    new_li.addEventListener("click", () => {
-                        level_list_level_clicked(level._id);
-                    })
-                    lev_list.appendChild(new_li);
+                    if (
+                        document.querySelector("#only-my-levels").checked == false || level.author_id == document.querySelector("#user-id").value
+                    ) {
+                        const new_li = document.createElement("li");
+                        new_li.innerHTML = `<h2>${level.level_name}</h2> by ${level.level_author} ID: ${level._id}`;
+                        new_li.addEventListener("click", () => {
+                            level_list_level_clicked(level._id);
+                        })
+                        lev_list.appendChild(new_li);
+                    }
+
+
                 })
 
             })
@@ -240,6 +249,7 @@ function update_in_db() {
     const level_id = document.querySelector("#level-id").value;
     const level_name = document.querySelector("#level-name").value;
     const author_name = document.querySelector("#author-name").value;
+    const author_id = document.querySelector("#user-id").value;
 
     if (level_id.trim() == "" || level_name.trim() == "" || author_name.trim() == "") {
         document.querySelector("#outmsg").innerHTML = "Error: ensure level name/author/id are not blank";
@@ -259,6 +269,7 @@ function update_in_db() {
             {
                 level_name: level_name,
                 level_author: author_name,
+                author_id: author_id,
                 level_block_data: input_json.level_block_data,
             }
         )
@@ -305,6 +316,7 @@ function load_from_to_db() {
 function save_new_to_db() {
     const level_name = document.querySelector("#level-name").value;
     const author_name = document.querySelector("#author-name").value;
+    const author_id = document.querySelector("#user-id").value;
 
     if (level_name.trim() == "" || author_name.trim() == "") {
         document.querySelector("#outmsg").innerHTML = "Error, ensure level name / author name is not blank";
@@ -324,6 +336,7 @@ function save_new_to_db() {
                 {
                     level_name: level_name,
                     level_author: author_name,
+                    author_id: author_id,
                     level_block_data: input_json.level_block_data,
                 }
             )

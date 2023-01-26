@@ -133,9 +133,20 @@
 
    .sign-in {
        width: 200px;
+       font-size: small;
+       margin-bottom: 1em;
    }
 
    #level-list-container {
        height: 130px;
        overflow: scroll;
+   }
+
+   .disabled-checkbox {
+       background-color: pink;
+       color: gray
+   }
+
+   #sign-in-container input {
+       width: 150px;
    }
