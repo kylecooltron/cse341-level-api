@@ -150,3 +150,9 @@
    #sign-in-container input {
        width: 150px;
    }
+
+   .api-link {
+       background-color: rgb(46, 46, 66);
+       color: rgb(97, 170, 253);
+       padding: 0.4em;
+   }
