@@ -90,13 +90,10 @@ function save_user_data() {
     fetch(`https://cse341-level-api.onrender.com/user/save`)
         .then(response => response.json())
         .then(response => {
-            console.log(response);
-            console.log(JSON.stringify(response))
-            console.log(response.user_id);
             try {
 
                 if (response.user_id) {
-                    document.querySelector("#user-name").innerHTML = response.name;
+                    document.querySelector("#user-name").innerHTML = response.user_name;
                     document.querySelector("#user-id").innerHTML = response.user_id;
                 }
 
