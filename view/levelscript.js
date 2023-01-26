@@ -86,8 +86,25 @@ function sign_out_button_pressed() {
     window.location.replace("https://cse341-level-api.onrender.com/logout");
 }
 
+function save_user_data() {
+    fetch(`https://cse341-level-api.onrender.com/user/save`)
+        .then(response => response.json())
+        .then(response => {
+            try {
+
+                if (response.user_id) {
+                    document.querySelector("#user-name").innerHTML = response.user_name;
+                    document.querySelector("#user-id").innerHTML = response.user_id;
+                }
+
+            } catch (err) {
+                console.log(err);
+            }
+        })
+}
+
 function check_user_signedin() {
-    fetch(`https://cse341-level-api.onrender.com/authorized`)
+    fetch(`https://cse341-level-api.onrender.com/user/authorized`)
         .then(response => response.json())
         .then(response => {
             try {
@@ -97,6 +114,9 @@ function check_user_signedin() {
                     document.querySelector("#sign-in-button").innerHTML = "Sign Out"
                     document.querySelector("#sign-in-container").classList.add("signed-in");
                     document.querySelector("#sign-in-button").addEventListener("click", sign_out_button_pressed);
+
+                    // attempt to add user data to database
+                    // save_user_data();
                 } else {
                     document.querySelector("#signed-in-status").innerHTML = "NOT SIGNED IN";
                     document.querySelector("#sign-in-container").classList.add("signed-out");
@@ -104,8 +124,8 @@ function check_user_signedin() {
                     document.querySelector("#update-in-db").disabled = true;
                 }
 
-            } catch {
-                console.log("Cannot detect log in status.")
+            } catch (err) {
+                console.log(err);
             }
         })
 }

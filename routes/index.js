@@ -3,6 +3,6 @@ const routes = require('express').Router();
 
 routes.use('/levels', require('./levels'))
 
-routes.use('/authorized', require('./user'))
+routes.use('/user', require('./user'))
 
 module.exports = routes;

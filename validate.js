@@ -15,5 +15,10 @@ const levelValidate = [
     check('level_block_data.*.causes_damage').isBoolean(),
 ]
 
+const userValidate = [
+    check('user_name', 'Minimum 3 characters.').exists().isLength({ min: 3 }).trim().escape(),
+    check('user_id', 'Minimum 3 characters.').exists().isLength({ min: 3 }).trim().escape(),
+]
 
-module.exports = { levelValidate };
+
+module.exports = { levelValidate, userValidate };

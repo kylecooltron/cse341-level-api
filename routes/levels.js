@@ -4,8 +4,6 @@
 const routes = require('express').Router();
 const levelsController = require('../controllers/levels');
 const { levelValidate } = require('../validate');
-// Include Express Validator Functions
-
 
 // get all Levels
 routes.get('/', levelsController.getAllLevels);

@@ -1,27 +1,13 @@
 /**
- * returns various JSON responses from levels collection
+ * returns various JSON responses from users collection
  */
 const routes = require('express').Router();
-// Include Express Validator Functions
-
-const isAuthorized = async (req, res) => {
-    try {
-        if (req.oidc.isAuthenticated()) {
-            res.status(200).json({
-                "authorized": true,
-            });
-        } else {
-            res.status(200).json({
-                "authorized": false,
-            });
-        }
-    } catch (err) {
-        res.status(500).json(err);
-    }
-};
+const usersController = require('../controllers/users');
 
 // get whether the user is signed in or not
-routes.get('/', isAuthorized);
+routes.get('/authorized', usersController.isAuthorized);
 
+// check if user is in database and add if not
+routes.get('/save', usersController.saveUserData);
 
 module.exports = routes;
