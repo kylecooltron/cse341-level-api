@@ -104,19 +104,19 @@ function save_user_data() {
 }
 
 function check_user_signedin() {
-    fetch(`https://cse341-level-api.onrender.com/user/authorized`)
-        .then(response => response.json())
-        .then(response => {
-            try {
+    try {
+        fetch(`https://cse341-level-api.onrender.com/user/authorized`)
+            .then(response => response.json())
+            .then(response => {
+
 
                 if (response.authorized) {
                     document.querySelector("#signed-in-status").innerHTML = "SIGNED IN";
                     document.querySelector("#sign-in-button").innerHTML = "Sign Out"
                     document.querySelector("#sign-in-container").classList.add("signed-in");
                     document.querySelector("#sign-in-button").addEventListener("click", sign_out_button_pressed);
-
                     // attempt to add user data to database
-                    // save_user_data();
+                    save_user_data();
                 } else {
                     document.querySelector("#signed-in-status").innerHTML = "NOT SIGNED IN";
                     document.querySelector("#sign-in-container").classList.add("signed-out");
@@ -124,10 +124,11 @@ function check_user_signedin() {
                     document.querySelector("#update-in-db").disabled = true;
                 }
 
-            } catch (err) {
-                console.log(err);
-            }
-        })
+
+            })
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 

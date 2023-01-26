@@ -81,7 +81,7 @@
        width: 250px;
        overflow-wrap: break-word;
        background-color: rgb(164, 245, 218);
-       height: 150px;
+       height: 100px;
        overflow: scroll;
    }
 
@@ -110,12 +110,12 @@
    #sign-in-container {
        margin: 0.5em;
        padding: 0.5em;
+       width: 250px;
    }
 
    #sign-in-container button {
        margin: 0.5em;
        padding: 0.5em;
-       width: 150px;
    }
 
    .signed-in {
@@ -136,6 +136,6 @@
    }
 
    #level-list-container {
-       height: 150px;
+       height: 130px;
        overflow: scroll;
    }
