@@ -18,6 +18,7 @@ const block_template = {
 const level_template = {
   level_name: String,
   level_author: String,
+  author_id: String,
   level_block_data: new ArrayOfTemplate(block_template),
 }
 

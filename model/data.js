@@ -45,9 +45,9 @@ const validate_request = (body, doc_template) => {
                 } else {
                     // try cast for other types
                     doc_template[key](body[key]);
-                    if (String(body[key]).trim() == "") {
-                        throw new Error(`${body[key]} is empty`);
-                    }
+                    // if (String(body[key]).trim() == "") {
+                    //     throw new Error(`${body[key]} is empty`);
+                    // }
                 }
             } catch (e) {
                 return [
