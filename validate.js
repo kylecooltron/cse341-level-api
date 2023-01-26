@@ -20,5 +20,18 @@ const userValidate = [
     check('user_id', 'Minimum 3 characters.').exists().isLength({ min: 3 }).trim().escape(),
 ]
 
+const enemyValidate = [
+    check('name', 'Minimum 3 characters.').exists().isLength({ min: 3 }).trim().escape(),
+    check('hit_points').trim().isNumeric(),
+    check('image_url').trim().isLength({ min: 3 }).escape(),
+]
 
-module.exports = { levelValidate, userValidate };
+const powerupValidate = [
+    check('name', 'Minimum 3 characters.').exists().isLength({ min: 3 }).trim().escape(),
+    check('health_boost').trim().isNumeric(),
+    check('speed_boost').trim().isNumeric(),
+    check('defense_boost').trim().isNumeric(),
+    check('image_url').trim().isLength({ min: 3 }).escape(),
+]
+
+module.exports = { levelValidate, userValidate, enemyValidate, powerupValidate };
