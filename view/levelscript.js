@@ -90,6 +90,7 @@ function save_user_data() {
     fetch(`https://cse341-level-api.onrender.com/user/save`)
         .then(response => response.json())
         .then(response => {
+            console.log(response);
             try {
 
                 if (response.user_id) {
@@ -108,7 +109,6 @@ function check_user_signedin() {
         fetch(`https://cse341-level-api.onrender.com/user/authorized`)
             .then(response => response.json())
             .then(response => {
-
 
                 if (response.authorized) {
                     document.querySelector("#signed-in-status").innerHTML = "SIGNED IN";
