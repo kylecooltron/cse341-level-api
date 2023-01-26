@@ -36,6 +36,8 @@ const saveUserData = async (req, res) => {
             return res.status(422).json({ errors: errors.array() });
         }
 
+        console.log(req.oidc);
+
         const user_data = {
             user_id: req.oidc.user_id,
             user_name: req.oidc.name
