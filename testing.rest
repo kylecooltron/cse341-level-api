@@ -58,3 +58,60 @@ content-type: application/json
 
 ### Delete level by Id
 DELETE {{render}}/levels/63ce094b2f5351359199d2fc HTTP/1.1
+
+
+// - - - - - ENEMY
+
+### list all enemies
+{{render}}/enemies
+
+
+### list level by id
+{{render}}/enemies/63d237d612f3eb2e68154d94
+
+
+### Create enemy
+POST {{render}}/enemies HTTP/1.1
+content-type: application/json
+
+{"name":"Render Test Enemyiut", "hit_points": "10", "image_url": "https://media.giphy.com/media/lPvBUcaerZhq3SF2RI/giphy.gif"}
+
+
+### Update enemy
+PUT {{render}}/enemies/63ce094b2f5351359199d2fc HTTP/1.1 
+content-type: application/json
+
+{"name":"Render Test Enemy 2.0", "hit_points": "100", "image_url": "https://media.giphy.com/media/VJZHLcEhJSLT26OCdp/giphy.gif"}
+
+
+### Delete enemy by Id
+DELETE {{render}}/enemies/63ce094b2f5351359199d2fc HTTP/1.1
+
+
+
+// - - - - - POWERUP
+
+### list all powerups
+{{render}}/powerups
+
+
+### list powerup by id
+{{render}}/powerups/63d237cc12f3eb2e68154d93
+
+
+### Create powerup
+POST {{render}}/powerups HTTP/1.1
+content-type: application/json
+
+{"name":"Render Test Powerupsgf", "health_boost": "10", "speed_boost": "10", "defense_boost": "20", "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Toicon-icon-fandom-powerup.svg/1200px-Toicon-icon-fandom-powerup.svg.png"}
+
+
+### Update powerup
+PUT {{render}}/powerups/63d237cc12f3eb2e68154d93 HTTP/1.1 
+content-type: application/json
+
+{"name":"Render Test Powerup 2.0", "health_boost": "10", "speed_boost": "10", "defense_boost": "20", "image_url": "https://static.thenounproject.com/png/1053386-200.png"}
+
+
+### Delete powerup by Id
+DELETE {{render}}/powerups/63d237cc12f3eb2e68154d93 HTTP/1.1

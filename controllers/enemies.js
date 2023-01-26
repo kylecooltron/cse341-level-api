@@ -64,9 +64,9 @@ const createEnemy = async (req, res) => {
       return res.status(422).json({ errors: errors.array() });
     }
 
-    const alreadyExists = await mongodb.getDb().db(database).collection(collection).findOne({ level_name: req.body.level_name });
+    const alreadyExists = await mongodb.getDb().db(database).collection(collection).findOne({ name: req.body.name });
     if (alreadyExists) {
-      throw new Error(`Enemy with name already exists: ${req.body.level_name}`);
+      throw new Error(`Enemy with name already exists: ${req.body.name}`);
     }
 
     const response = await mongodb.getDb().db(database).collection(collection).insertOne(req.body);
