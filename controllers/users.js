@@ -37,7 +37,7 @@ const saveUserData = async (req, res) => {
         }
 
         const user_data = {
-            user_id: req.oidc.user.sid,
+            user_id: req.oidc.user.sub,
             user_name: req.oidc.user.name
         }
 
