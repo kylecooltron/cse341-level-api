@@ -5,12 +5,13 @@ const MongoClient = require('mongodb').MongoClient;
 
 let _db;
 
-const initDb = (callback) => {
+const initDb = async (callback) => {
   if (_db) {
     console.log('Db is already initialized!');
     return callback(null, _db);
   }
-  MongoClient.connect(process.env.MONGODB_URI)
+  //eslint-disable-next-line no-undef
+  await MongoClient.connect(process.env.MONGODB_URI)
     .then(client => {
       _db = client;
       callback(null, _db);
@@ -27,7 +28,14 @@ const getDb = () => {
   return _db;
 };
 
+const closeDb = () => {
+  if (_db) {
+    _db.close();
+  }
+}
+
 module.exports = {
   initDb,
-  getDb
+  getDb,
+  closeDb
 };
